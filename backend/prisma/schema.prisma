@@ -9,11 +9,12 @@ datasource db {
 }
 
 model Channel {
-  id         String  @id @default(uuid()) @db.Uuid
-  telegramId BigInt  @unique @map("telegram_id")
-  username   String? @unique
+  id         String         @id @default(uuid()) @db.Uuid
+  telegramId BigInt         @unique @map("telegram_id")
+  username   String?        @unique
   title      String?
-  enabled    Boolean @default(true)
+  enabled    Boolean        @default(true)
+  posts      TelegramPost[]
 
   checkpoint IngestionCheckpoint?
 
@@ -31,4 +32,20 @@ model IngestionCheckpoint {
   channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
 
   @@map("ingestion_checkpoints")
+}
+
+model TelegramPost {
+  id                String   @id @default(uuid())
+  channelId String @db.Uuid
+  telegramMessageId BigInt
+  text              String
+  postedAt          DateTime
+  sourceUrl         String?
+  createdAt         DateTime @default(now())
+
+  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@unique([channelId, telegramMessageId])
+  @@index([postedAt])
+  @@map("telegram_posts")
 }
