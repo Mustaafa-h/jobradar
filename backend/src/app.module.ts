@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { HealthModule } from './health/health.module';
 import { ChannelsModule } from './channels/channels.module';
-
+import { MatchingModule } from './matching/matching.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -14,6 +14,7 @@ import { ChannelsModule } from './channels/channels.module';
     DatabaseModule,
     HealthModule,
     ChannelsModule,
+    MatchingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

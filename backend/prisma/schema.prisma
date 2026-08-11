@@ -34,14 +34,23 @@ model IngestionCheckpoint {
   @@map("ingestion_checkpoints")
 }
 
+enum MatchLevel {
+  STRONG
+  GOOD
+  STRETCH
+  NOT_RELEVANT
+}
+
 model TelegramPost {
-  id                String   @id @default(uuid())
-  channelId String @db.Uuid
+  id                String      @id @default(uuid())
+  channelId         String      @db.Uuid
   telegramMessageId BigInt
   text              String
   postedAt          DateTime
   sourceUrl         String?
-  createdAt         DateTime @default(now())
+  matchLevel        MatchLevel?
+  classifiedAt      DateTime?
+  createdAt         DateTime    @default(now())
 
   channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
 
