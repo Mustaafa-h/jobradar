@@ -1,0 +1,34 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Channel {
+  id         String  @id @default(uuid()) @db.Uuid
+  telegramId BigInt  @unique @map("telegram_id")
+  username   String? @unique
+  title      String?
+  enabled    Boolean @default(true)
+
+  checkpoint IngestionCheckpoint?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("channels")
+}
+
+model IngestionCheckpoint {
+  channelId     String    @id @map("channel_id") @db.Uuid
+  lastMessageId BigInt    @default(0) @map("last_message_id")
+  lastCheckedAt DateTime? @map("last_checked_at")
+
+  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+
+  @@map("ingestion_checkpoints")
+}
