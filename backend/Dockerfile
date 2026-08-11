@@ -32,6 +32,9 @@ COPY --from=build /app/dist ./dist
 
 EXPOSE 3000
 
+RUN mkdir -p /app/data/telegram \
+  && chown -R node:node /app/data
+  
 USER node
 
 CMD ["node", "dist/main.js"]

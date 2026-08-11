@@ -24,11 +24,17 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://jobradar:${POSTGRES_PASSWORD}@postgres:5432/jobradar?schema=public
+      TELEGRAM_API_ID: ${TELEGRAM_API_ID}
+      TELEGRAM_API_HASH: ${TELEGRAM_API_HASH}
+      TELEGRAM_SESSION_PATH: /app/data/telegram/main-account
     ports:
       - "127.0.0.1:3000:3000"
+    volumes:
+      - telegram_session_data:/app/data/telegram
     depends_on:
       postgres:
         condition: service_healthy
 
 volumes:
   postgres_data:
+  telegram_session_data:
