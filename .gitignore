@@ -8,3 +8,5 @@ coverage/
 *.session
 *.session-journal
 backend/src/generated/prisma/
+config/channels.json
+telegram-channels.txt

@@ -1,0 +1,9 @@
+{
+  "channels": [
+    {
+      "telegramId": "1234567890",
+      "title": "Example Jobs Channel",
+      "enabled": true
+    }
+  ]
+}
