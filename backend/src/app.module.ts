@@ -6,6 +6,8 @@ import { DatabaseModule } from './database/database.module';
 import { HealthModule } from './health/health.module';
 import { ChannelsModule } from './channels/channels.module';
 import { MatchingModule } from './matching/matching.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { DigestModule } from './digest/digest.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -15,6 +17,8 @@ import { MatchingModule } from './matching/matching.module';
     HealthModule,
     ChannelsModule,
     MatchingModule,
+    NotificationsModule,
+    DigestModule,
   ],
   controllers: [AppController],
   providers: [AppService],

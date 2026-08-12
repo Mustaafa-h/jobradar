@@ -24,6 +24,8 @@ services:
       DATABASE_URL: postgresql://jobradar:${POSTGRES_PASSWORD}@postgres:5432/jobradar?schema=public
       TELEGRAM_API_ID: ${TELEGRAM_API_ID}
       TELEGRAM_API_HASH: ${TELEGRAM_API_HASH}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      TELEGRAM_DIGEST_CHAT_ID: ${TELEGRAM_DIGEST_CHAT_ID}
       TELEGRAM_SESSION_PATH: /app/data/telegram/main-account
       TELEGRAM_CHANNELS_CONFIG_PATH: /app/config/channels.json
     ports:

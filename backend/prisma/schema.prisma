@@ -51,6 +51,7 @@ model TelegramPost {
   matchLevel        MatchLevel?
   classifiedAt      DateTime?
   createdAt         DateTime    @default(now())
+  deliveredAt       DateTime?
 
   channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
 
