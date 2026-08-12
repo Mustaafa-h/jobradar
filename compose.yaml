@@ -26,6 +26,7 @@ services:
       TELEGRAM_API_HASH: ${TELEGRAM_API_HASH}
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
       TELEGRAM_DIGEST_CHAT_ID: ${TELEGRAM_DIGEST_CHAT_ID}
+      CHECK_TRIGGER_TOKEN: ${CHECK_TRIGGER_TOKEN}
       TELEGRAM_SESSION_PATH: /app/data/telegram/main-account
       TELEGRAM_CHANNELS_CONFIG_PATH: /app/config/channels.json
     ports:
@@ -37,6 +38,28 @@ services:
       postgres:
         condition: service_healthy
 
+  n8n:
+    image: n8nio/n8n:2.34.5
+    container_name: jobradar-n8n
+    restart: unless-stopped
+    environment:
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      CHECK_TRIGGER_TOKEN: ${CHECK_TRIGGER_TOKEN}
+      N8N_HOST: localhost
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      N8N_SECURE_COOKIE: "false"
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "true"
+      GENERIC_TIMEZONE: Asia/Baghdad
+      TZ: Asia/Baghdad
+    ports:
+      - "127.0.0.1:5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
   telegram_session_data:
+  n8n_data:

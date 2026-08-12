@@ -8,6 +8,7 @@ import { ChannelsModule } from './channels/channels.module';
 import { MatchingModule } from './matching/matching.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { DigestModule } from './digest/digest.module';
+import { ChecksModule } from './checks/checks.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,6 +20,7 @@ import { DigestModule } from './digest/digest.module';
     MatchingModule,
     NotificationsModule,
     DigestModule,
+    ChecksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
