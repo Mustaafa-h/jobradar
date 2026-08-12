@@ -5,6 +5,7 @@ const scripts = [
   'ingest-telegram-posts.js',
   'classify-telegram-posts.js',
   'send-digest.js',
+  'cleanup-old-posts.js',
 ];
 
 function runScript(script: string): void {
