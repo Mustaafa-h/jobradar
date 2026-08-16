@@ -44,6 +44,7 @@ services:
     restart: unless-stopped
     environment:
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
       CHECK_TRIGGER_TOKEN: ${CHECK_TRIGGER_TOKEN}
       N8N_HOST: localhost
       N8N_PORT: 5678
