@@ -34,10 +34,40 @@ describe('JobMatcherService', () => {
     ).toBe(MatchLevel.STRETCH);
   });
 
-  it('rejects unrelated network engineering', () => {
+    it('marks a network engineer role as stretch', () => {
     expect(
-      matcher.classify('Network Engineer vacancy in Baghdad'),
-    ).toBe(MatchLevel.NOT_RELEVANT);
+      matcher.classify('Junior Network Engineer vacancy in Baghdad'),
+    ).toBe(MatchLevel.STRETCH);
+  });
+
+  it('marks a NOC role as stretch', () => {
+    expect(
+      matcher.classify('NOC Engineer needed in Erbil'),
+    ).toBe(MatchLevel.STRETCH);
+  });
+
+  it('marks a technical support role as stretch', () => {
+    expect(
+      matcher.classify('Technical Support Specialist - Baghdad'),
+    ).toBe(MatchLevel.STRETCH);
+  });
+
+  it('marks a system administrator role as stretch', () => {
+    expect(
+      matcher.classify('System Administrator required in Erbil'),
+    ).toBe(MatchLevel.STRETCH);
+  });
+
+  it('marks a database administrator role as stretch', () => {
+    expect(
+      matcher.classify('Database Administrator - Remote within Iraq'),
+    ).toBe(MatchLevel.STRETCH);
+  });
+
+  it('supports adjacent Arabic IT roles', () => {
+    expect(
+      matcher.classify('مطلوب موظف دعم فني للعمل في بغداد'),
+    ).toBe(MatchLevel.STRETCH);
   });
 
   it('accepts a remote Flutter role as strong', () => {
